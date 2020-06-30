@@ -174,15 +174,9 @@ end
 
 
 def player_stats(player_name)
-  game_hash.each do |location, team|
-    team.each do |attribute, data|
-     if attribute == :players
-       data.each do |player, stats|
-        if player == player_name
-          return stats
-        end
-       end
-      end
+  game_hash.collect do |location, team_data|
+    if team_data[:players].include?(player_name)
+     return team_data[:players][player_name]
     end
   end
 end
